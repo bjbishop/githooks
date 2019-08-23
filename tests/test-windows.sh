@@ -30,7 +30,7 @@ sed -i 's|</dev/tty||g' "$ROOT_DIR"/githooks/install.sh || exit 4
 sed -i -E 's|HOOK_NAME=.*|HOOK_NAME=\${HOOK_NAME:-\$(basename "\$0")}|' "$ROOT_DIR"/githooks/base-template.sh &&
     sed -i -E 's|HOOK_FOLDER=.*|HOOK_FOLDER=\${HOOK_FOLDER:-\$(dirname "\$0")}|' "$ROOT_DIR"/githooks/base-template.sh &&
     sed -i 's|ACCEPT_CHANGES=|ACCEPT_CHANGES=\${ACCEPT_CHANGES}|' "$ROOT_DIR"/githooks/base-template.sh &&
-    sed -i 's%read -r "\$VARIABLE"%eval "\$VARIABLE=\\\\\$\$(eval echo "\\\\\$VARIABLE")" # disabled for tests: read -r "\$VARIABLE"%' "$ROOT_DIR"/githooks/base-template.sh || exit 5
+    sed -i 's%read -r "\$VARIABLE"%echo "\$VARIABLE" >/dev/null # disabled for tests: read -r "\$VARIABLE"%' "$ROOT_DIR"/githooks/base-template.sh || exit 5
 
 # Patch all paths to use windows base path
 sed -i -E "s|([^\"])/var/lib/|\1\"$ROOT_DIR\"/|g" "$ROOT_DIR"/tests/exec-steps.sh "$ROOT_DIR"/tests/step-* || exit 7
