@@ -5,6 +5,8 @@ if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then
     exit 1
 fi
 
+exec </dev/null
+
 TEST_RUNS=0
 FAILED=0
 SKIPPED=0
