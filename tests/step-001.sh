@@ -9,5 +9,6 @@ mkdir -p /tmp/test1 && cd /tmp/test1 || exit 1
 git init || exit 1
 
 # verify that the pre-commit is installed
-cat .git/hooks/pre-commit
 cat .git/hooks/pre-commit | grep 'https://github.com/rycus86/githooks'
+
+exit 0
