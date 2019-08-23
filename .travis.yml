@@ -6,7 +6,7 @@ script:
 
 matrix:
   include:
-  - env: TEST_INSTANCE=test-alpine
+  # - env: TEST_INSTANCE=test-alpine
   # - env: TEST_INSTANCE=test-alpine-curl
   # - env: TEST_INSTANCE=test-alpine-wget
   # - env: TEST_INSTANCE=test-alpine-user
