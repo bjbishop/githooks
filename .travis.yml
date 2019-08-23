@@ -21,3 +21,6 @@ matrix:
   - env: TEST_INSTANCE=test-whitespace
   - env: TEST_INSTANCE=test-rules
   - env: TEST_INSTANCE=coverage
+  # windows
+  - os: windows
+    env: TEST_INSTANCE=test-windows
