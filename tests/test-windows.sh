@@ -18,6 +18,7 @@ GITHOOKS_TESTS="$ROOT_DIR/tests"
 git config --global user.email "githook@test.com" || exit 2
 git config --global user.name "Githook Tests" || exit 2
 
+mkdir -p "$GITHOOKS_TESTS" || true
 cp tests/exec-steps.sh "$GITHOOKS_TESTS"/ || exit 3
 # shellcheck disable=SC2086
 cp tests/$STEPS_TO_RUN "$GITHOOKS_TESTS"/ || exit 3
