@@ -54,7 +54,7 @@ for STEP in /var/lib/tests/step-*.sh; do
         mkdir -p /usr/share/git-core/templates/hooks
     fi
 
-    UNINSTALL_OUTPUT=$(printf "y\\n/\\n" | sh -x /var/lib/githooks/uninstall.sh 2>&1)
+    UNINSTALL_OUTPUT=$(printf "y\\n/\\n" | sh -x /var/lib/githooks/uninstall.sh 2>&1 | tee /dev/stderr)
     # shellcheck disable=SC2181
     if [ $? -ne 0 ]; then
         echo "! Uninstall failed in $STEP, output:"
