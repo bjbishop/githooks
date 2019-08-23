@@ -1,26 +1,23 @@
-sudo:
-  - required
-services:
-  - docker
 install: skip
 
 script:
   - sh "tests/${TEST_INSTANCE}.sh"
 
-env:
-  - TEST_INSTANCE=test-alpine
-  - TEST_INSTANCE=test-alpine-curl
-  - TEST_INSTANCE=test-alpine-wget
-  - TEST_INSTANCE=test-alpine-user
-  - TEST_INSTANCE=test-alpine-lfs
-  - TEST_INSTANCE=test-debian
-  - TEST_INSTANCE=test-debian-user
-  - TEST_INSTANCE=test-ubuntu
-  - TEST_INSTANCE=test-centos
-  - TEST_INSTANCE=test-arch
-  - TEST_INSTANCE=test-fedora
-  - TEST_INSTANCE=test-opensuse
-  - TEST_INSTANCE=test-corehookspath
-  - TEST_INSTANCE=test-whitespace
-  - TEST_INSTANCE=test-rules
-  - TEST_INSTANCE=coverage
+matrix:
+  include:
+  - env: TEST_INSTANCE=test-alpine
+  - env: TEST_INSTANCE=test-alpine-curl
+  - env: TEST_INSTANCE=test-alpine-wget
+  - env: TEST_INSTANCE=test-alpine-user
+  - env: TEST_INSTANCE=test-alpine-lfs
+  - env: TEST_INSTANCE=test-debian
+  - env: TEST_INSTANCE=test-debian-user
+  - env: TEST_INSTANCE=test-ubuntu
+  - env: TEST_INSTANCE=test-centos
+  - env: TEST_INSTANCE=test-arch
+  - env: TEST_INSTANCE=test-fedora
+  - env: TEST_INSTANCE=test-opensuse
+  - env: TEST_INSTANCE=test-corehookspath
+  - env: TEST_INSTANCE=test-whitespace
+  - env: TEST_INSTANCE=test-rules
+  - env: TEST_INSTANCE=coverage
