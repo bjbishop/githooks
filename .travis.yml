@@ -1,3 +1,4 @@
+language: shell
 install: skip
 
 script:
@@ -6,21 +7,21 @@ script:
 matrix:
   include:
   - env: TEST_INSTANCE=test-alpine
-  - env: TEST_INSTANCE=test-alpine-curl
-  - env: TEST_INSTANCE=test-alpine-wget
-  - env: TEST_INSTANCE=test-alpine-user
-  - env: TEST_INSTANCE=test-alpine-lfs
-  - env: TEST_INSTANCE=test-debian
-  - env: TEST_INSTANCE=test-debian-user
-  - env: TEST_INSTANCE=test-ubuntu
-  - env: TEST_INSTANCE=test-centos
-  - env: TEST_INSTANCE=test-arch
-  - env: TEST_INSTANCE=test-fedora
-  - env: TEST_INSTANCE=test-opensuse
-  - env: TEST_INSTANCE=test-corehookspath
-  - env: TEST_INSTANCE=test-whitespace
-  - env: TEST_INSTANCE=test-rules
-  - env: TEST_INSTANCE=coverage
+  # - env: TEST_INSTANCE=test-alpine-curl
+  # - env: TEST_INSTANCE=test-alpine-wget
+  # - env: TEST_INSTANCE=test-alpine-user
+  # - env: TEST_INSTANCE=test-alpine-lfs
+  # - env: TEST_INSTANCE=test-debian
+  # - env: TEST_INSTANCE=test-debian-user
+  # - env: TEST_INSTANCE=test-ubuntu
+  # - env: TEST_INSTANCE=test-centos
+  # - env: TEST_INSTANCE=test-arch
+  # - env: TEST_INSTANCE=test-fedora
+  # - env: TEST_INSTANCE=test-opensuse
+  # - env: TEST_INSTANCE=test-corehookspath
+  # - env: TEST_INSTANCE=test-whitespace
+  # - env: TEST_INSTANCE=test-rules
+  # - env: TEST_INSTANCE=coverage
   # windows
   - os: windows
     env: TEST_INSTANCE=test-windows
