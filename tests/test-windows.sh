@@ -11,7 +11,7 @@ cp base-template.sh "$ROOT_DIR/githooks"/ || exit 1
 cp install.sh "$ROOT_DIR/githooks"/ || exit 1
 cp uninstall.sh "$ROOT_DIR/githooks"/ || exit 1
 cp cli.sh "$ROOT_DIR/githooks"/ || exit 1
-cp examples "$ROOT_DIR/githooks"/ || exit 1
+cp -r examples "$ROOT_DIR/githooks"/ || exit 1
 
 GITHOOKS_TESTS="$ROOT_DIR/tests"
 
