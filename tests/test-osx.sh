@@ -41,11 +41,14 @@ sed -i '' -E "s|\"/var/lib/|\"$ROOT_DIR/|g" "$ROOT_DIR"/tests/exec-steps.sh "$RO
 # Allow running outside of Docker containers
 sed -i '' -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if false; then|" "$ROOT_DIR"/tests/exec-steps.sh
 
+find /usr -name 'pre-commit*'
+find /Library -name 'pre-commit*'
+
 # Configure a default Git template directory for Windows
-#export GIT_TEMPLATE_DIR="/c/Program Files/Git/mingw64/share/git-core/templates"
+export GIT_TEMPLATE_DIR="/xyz"
 
 # Give tests a bit more time on Windows
-#export TIMEOUT=15
+export TIMEOUT=15
 
 # Run the tests with no input available
-: | sh -x "$ROOT_DIR"/tests/exec-steps.sh
+: | sh "$ROOT_DIR"/tests/exec-steps.sh
