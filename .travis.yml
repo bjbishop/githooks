@@ -18,8 +18,8 @@ matrix:
   # # execute a build to measure test coverage
   # - env: TEST_INSTANCE=coverage
 
-  # run some of the pre-commit checks in CI too
-  - env: TEST_INSTANCE=test-rules
+  # # run some of the pre-commit checks in CI too
+  # - env: TEST_INSTANCE=test-rules
 
   # # all the Linux tests
   # - env: TEST_INSTANCE=test-alpine
