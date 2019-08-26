@@ -39,8 +39,14 @@ sed -i '' -E "s|\"/var/lib/|\"$ROOT_DIR/|g" "$ROOT_DIR"/tests/exec-steps.sh "$RO
 # Allow running outside of Docker containers
 sed -i '' -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if false; then|" "$ROOT_DIR"/tests/exec-steps.sh
 
-# Configure a default Git template directory for Windows
+# Configure a default Git template directory for OS X
 export GIT_TEMPLATE_DIR="/usr/local/Cellar/git/2.18.0/share/git-core/templates"
+
+# Setup a timeout command for OS X
+sudo cat << EOF > /usr/bin/timeout
+perl -e 'alarm shift; exec @ARGV' "$@";
+EOF
+sudo chmod +x /usr/bin/timeout
 
 # Give tests a bit more time on Windows
 export TIMEOUT=15
