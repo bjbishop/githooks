@@ -33,7 +33,7 @@ for STEP in /var/lib/tests/step-*.sh; do
 
     TEST_RUNS=$((TEST_RUNS + 1))
 
-    if command -v timeout; then
+    if command -v timeout >/dev/null; then
         TEST_OUTPUT=$(timeout "$TIMEOUT" sh "$STEP" 2>&1)
     else
         TEST_OUTPUT=$(sh "$STEP" 2>&1)
