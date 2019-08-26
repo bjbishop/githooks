@@ -6,22 +6,33 @@ script:
 
 matrix:
   include:
-  # - env: TEST_INSTANCE=test-alpine
-  # - env: TEST_INSTANCE=test-alpine-curl
-  # - env: TEST_INSTANCE=test-alpine-wget
-  # - env: TEST_INSTANCE=test-alpine-user
-  # - env: TEST_INSTANCE=test-alpine-lfs
-  # - env: TEST_INSTANCE=test-debian
-  # - env: TEST_INSTANCE=test-debian-user
-  # - env: TEST_INSTANCE=test-ubuntu
-  # - env: TEST_INSTANCE=test-centos
-  # - env: TEST_INSTANCE=test-arch
-  # - env: TEST_INSTANCE=test-fedora
-  # - env: TEST_INSTANCE=test-opensuse
-  # - env: TEST_INSTANCE=test-corehookspath
-  # - env: TEST_INSTANCE=test-whitespace
-  # - env: TEST_INSTANCE=test-rules
-  # - env: TEST_INSTANCE=coverage
-  # windows
+
+  # Windows comes first because it's the slowest
   - os: windows
     env: TEST_INSTANCE=test-windows
+
+  # execute all the steps as-is on OS X
+  - os: osx
+    env: TEST_INSTANCE=exec-steps
+
+  # all the Linux tests
+  - env: TEST_INSTANCE=test-alpine
+  - env: TEST_INSTANCE=test-alpine-curl
+  - env: TEST_INSTANCE=test-alpine-wget
+  - env: TEST_INSTANCE=test-alpine-user
+  - env: TEST_INSTANCE=test-alpine-lfs
+  - env: TEST_INSTANCE=test-debian
+  - env: TEST_INSTANCE=test-debian-user
+  - env: TEST_INSTANCE=test-ubuntu
+  - env: TEST_INSTANCE=test-centos
+  - env: TEST_INSTANCE=test-arch
+  - env: TEST_INSTANCE=test-fedora
+  - env: TEST_INSTANCE=test-opensuse
+  - env: TEST_INSTANCE=test-corehookspath
+  - env: TEST_INSTANCE=test-whitespace
+
+  # run some of the pre-commit checks in CI too
+  - env: TEST_INSTANCE=test-rules
+
+  # execute a build to measure test coverage
+  - env: TEST_INSTANCE=coverage
