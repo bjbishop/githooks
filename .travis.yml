@@ -21,24 +21,24 @@ matrix:
       TEST_TRAVIS_OS=osx
       TEST_TIMEOUT=60
   
-  # # execute a build to measure test coverage
-  # - env: TEST_INSTANCE=coverage
+  # execute a build to measure test coverage
+  - env: TEST_INSTANCE=coverage
 
-  # # run some of the pre-commit checks in CI too
-  # - env: TEST_INSTANCE=test-rules
+  # run some of the pre-commit checks in CI too
+  - env: TEST_INSTANCE=test-rules
 
-  # # all the Linux tests
-  # - env: TEST_INSTANCE=test-alpine
-  # - env: TEST_INSTANCE=test-alpine-curl
-  # - env: TEST_INSTANCE=test-alpine-wget
-  # - env: TEST_INSTANCE=test-alpine-user
-  # - env: TEST_INSTANCE=test-alpine-lfs
-  # - env: TEST_INSTANCE=test-debian
-  # - env: TEST_INSTANCE=test-debian-user
-  # - env: TEST_INSTANCE=test-ubuntu
-  # - env: TEST_INSTANCE=test-centos
-  # - env: TEST_INSTANCE=test-arch
-  # - env: TEST_INSTANCE=test-fedora
-  # - env: TEST_INSTANCE=test-opensuse
-  # - env: TEST_INSTANCE=test-corehookspath
-  # - env: TEST_INSTANCE=test-whitespace
+  # all the Linux tests
+  - env: TEST_INSTANCE=test-alpine
+  - env: TEST_INSTANCE=test-alpine-curl
+  - env: TEST_INSTANCE=test-alpine-wget
+  - env: TEST_INSTANCE=test-alpine-user
+  - env: TEST_INSTANCE=test-alpine-lfs
+  - env: TEST_INSTANCE=test-debian
+  - env: TEST_INSTANCE=test-debian-user
+  - env: TEST_INSTANCE=test-ubuntu
+  - env: TEST_INSTANCE=test-centos
+  - env: TEST_INSTANCE=test-arch
+  - env: TEST_INSTANCE=test-fedora
+  - env: TEST_INSTANCE=test-opensuse
+  - env: TEST_INSTANCE=test-corehookspath
+  - env: TEST_INSTANCE=test-whitespace
