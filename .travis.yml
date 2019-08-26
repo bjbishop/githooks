@@ -12,13 +12,14 @@ matrix:
     env: >
       TEST_INSTANCE=test-windows
       TEST_TRAVIS_OS=windows
-      TIMEOUT=30
+      TEST_TIMEOUT=30
 
   # also kick off an OS X build early on
   - os: osx
     env: >
       TEST_INSTANCE=test-osx
       TEST_TRAVIS_OS=osx
+      TEST_TIMEOUT=30
   
   # # execute a build to measure test coverage
   # - env: TEST_INSTANCE=coverage

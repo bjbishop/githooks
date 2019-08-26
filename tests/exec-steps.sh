@@ -8,7 +8,7 @@ fi
 TEST_RUNS=0
 FAILED=0
 SKIPPED=0
-TIMEOUT=${TIMEOUT:-10}
+TIMEOUT=${TEST_TIMEOUT:-10}
 
 FAILED_TEST_LIST=""
 
@@ -33,12 +33,7 @@ for STEP in /var/lib/tests/step-*.sh; do
 
     TEST_RUNS=$((TEST_RUNS + 1))
 
-    if command -v timeout >/dev/null; then
-        TEST_OUTPUT=$(timeout "$TIMEOUT" sh "$STEP" 2>&1)
-    else
-        TEST_OUTPUT=$(sh "$STEP" 2>&1)
-    fi
-
+    TEST_OUTPUT=$(timeout "$TIMEOUT" sh "$STEP" 2>&1)
     TEST_RESULT=$?
 
     # shellcheck disable=SC2181
