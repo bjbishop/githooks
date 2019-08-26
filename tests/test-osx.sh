@@ -45,7 +45,7 @@ find /usr -name 'pre-commit*'
 find /Library -name 'pre-commit*'
 
 # Configure a default Git template directory for Windows
-export GIT_TEMPLATE_DIR="/xyz"
+export GIT_TEMPLATE_DIR="/usr/local/Cellar/git/2.18.0/share/git-core/templates"
 
 # Give tests a bit more time on Windows
 export TIMEOUT=15
