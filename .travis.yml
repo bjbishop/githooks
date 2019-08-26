@@ -9,11 +9,15 @@ matrix:
 
   # Windows comes first because it's the slowest
   - os: windows
-    env: TEST_INSTANCE=test-windows
+    env: >
+      TEST_INSTANCE=test-windows
+      TEST_TRAVIS_OS=windows
 
   # also kick off an OS X build early on
   - os: osx
-    env: TEST_INSTANCE=test-osx
+    env: >
+      TEST_INSTANCE=test-osx
+      TEST_TRAVIS_OS=osx
   
   # # execute a build to measure test coverage
   # - env: TEST_INSTANCE=coverage
