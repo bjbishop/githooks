@@ -5,7 +5,7 @@ else
     STEPS_TO_RUN="step-*"
 fi
 
-ROOT_DIR="/var/lib"
+ROOT_DIR=~"/Library/testroot"
 mkdir -p "$ROOT_DIR/githooks" || true
 cp base-template.sh "$ROOT_DIR/githooks"/ || exit 1
 cp install.sh "$ROOT_DIR/githooks"/ || exit 1
