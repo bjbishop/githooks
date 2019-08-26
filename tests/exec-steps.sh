@@ -28,13 +28,19 @@ for STEP in /var/lib/tests/step-*.sh; do
     rm -rf ~/.githooks
     rm -rf /tmp/*
 
-    mkdir -p /var/backup/githooks &&
-        cp -r /var/lib/githooks/* /var/backup/githooks/.
+    mkdir -p /var/lib/backup/githooks &&
+        cp -r /var/lib/githooks/* /var/lib/backup/githooks/.
 
     TEST_RUNS=$((TEST_RUNS + 1))
 
-    TEST_OUTPUT=$(timeout "$TIMEOUT" sh "$STEP" 2>&1)
+    if command -v timeout; then
+        TEST_OUTPUT=$(timeout "$TIMEOUT" sh "$STEP" 2>&1)
+    else
+        TEST_OUTPUT=$(sh "$STEP" 2>&1)
+    fi
+
     TEST_RESULT=$?
+
     # shellcheck disable=SC2181
     if [ $TEST_RESULT -eq 249 ]; then
         REASON=$(echo "$TEST_OUTPUT" | tail -1)
@@ -79,7 +85,7 @@ for STEP in /var/lib/tests/step-*.sh; do
     git config --global --unset alias.hooks
     git config --global --unset githooks.installDir
 
-    cp -r /var/backup/githooks/* /var/lib/githooks/. 2>/dev/null
+    cp -r /var/lib/backup/githooks/* /var/lib/githooks/. 2>/dev/null
 
     echo
 
