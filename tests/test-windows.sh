@@ -42,4 +42,4 @@ sed -i -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if fa
 # Configure a default Git template directory for Windows
 export GIT_TEMPLATE_DIR="/c/Program Files/Git/mingw64/share/git-core/templates"
 
-exec </dev/null && sh "$ROOT_DIR"/tests/exec-steps.sh
+: | sh "$ROOT_DIR"/tests/exec-steps.sh
