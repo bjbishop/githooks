@@ -33,8 +33,15 @@ for STEP in /var/lib/tests/step-*.sh; do
 
     TEST_RUNS=$((TEST_RUNS + 1))
 
+    TEST_TIME_START=$(date +%s)
     TEST_OUTPUT=$(timeout "$TIMEOUT" sh "$STEP" 2>&1)
     TEST_RESULT=$?
+    TEST_TIME_END=$(date +%s)
+
+    let TEST_DURATION="TEST_TIME_END-TEST_TIME_START"
+    if [ $TEST_DURATION -gt 0 ]; then
+        echo "  __ Took $TEST_DURATION seconds"
+    fi
 
     # shellcheck disable=SC2181
     if [ $TEST_RESULT -eq 249 ]; then
