@@ -44,3 +44,4 @@ sed -i -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if fa
 set -x
 which git
 git config --global --list
+find /c/Program Files/Git
