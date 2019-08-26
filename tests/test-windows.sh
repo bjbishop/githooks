@@ -39,8 +39,7 @@ sed -i -E "s|\"/var/lib/|\"$ROOT_DIR/|g" "$ROOT_DIR"/tests/exec-steps.sh "$ROOT_
 # Allow running outside of Docker containers
 sed -i -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if false; then|" "$ROOT_DIR"/tests/exec-steps.sh
 
-# Prepare the default Git directory
-mkdir -p /usr/share/git-core/templates
-cp -r "/c/Program Files/Git/mingw64/share/git-core/templates"/* /usr/share/git-core/templates/
+# Prepare the default Git template directory
+export GIT_TEMPLATE_DIR="/c/Program Files/Git/mingw64/share/git-core/templates"
 
 : | sh "$ROOT_DIR"/tests/exec-steps.sh
