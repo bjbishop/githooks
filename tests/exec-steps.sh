@@ -13,8 +13,8 @@ TIMEOUT=${TEST_TIMEOUT:-10}
 FAILED_TEST_LIST=""
 
 for STEP in /var/lib/tests/step-*.sh; do
-    STEP_NAME=$(basename "$STEP" | sed 's/.sh$//')
-    STEP_DESC=$(head -3 "$STEP" | tail -1 | sed 's/#\s*//')
+    STEP_NAME=$(basename "$STEP" | sed -E 's/.sh$//')
+    STEP_DESC=$(head -3 "$STEP" | tail -1 | sed -E 's/#\s*//')
 
     echo "> Executing $STEP_NAME"
     echo "  :: $STEP_DESC"
@@ -33,6 +33,8 @@ for STEP in /var/lib/tests/step-*.sh; do
 
     TEST_RUNS=$((TEST_RUNS + 1))
 
+    # first execute the test
+
     TEST_TIME_START=$(date +%s)
     TEST_OUTPUT=$(timeout "$TIMEOUT" sh "$STEP" 2>&1)
     TEST_RESULT=$?
@@ -42,6 +44,24 @@ for STEP in /var/lib/tests/step-*.sh; do
     if [ $TEST_DURATION -gt 1 ]; then
         echo "  __ Took $TEST_DURATION seconds"
     fi
+
+    # then execute an uninstall
+
+    if [ -w /usr/share/git-core ]; then
+        mkdir -p /usr/share/git-core/templates/hooks
+    fi
+
+    UNINSTALL_TIME_START=$(date +%s)
+    UNINSTALL_OUTPUT=$(printf "y\\n\\n" | sh /var/lib/githooks/uninstall.sh 2>&1)
+    UNINSTALL_RESULT=$?
+    UNINSTALL_TIME_END=$(date +%s)
+
+    UNINSTALL_DURATION=$((UNINSTALL_TIME_END - UNINSTALL_TIME_START))
+    if [ $UNINSTALL_DURATION -gt 1 ]; then
+        echo "  __ Uninstall took $UNINSTALL_DURATION seconds"
+    fi
+
+    # then print out the test results
 
     # shellcheck disable=SC2181
     if [ $TEST_RESULT -eq 249 ]; then
@@ -66,17 +86,16 @@ for STEP in /var/lib/tests/step-*.sh; do
 
     fi
 
-    if [ -w /usr/share/git-core ]; then
-        mkdir -p /usr/share/git-core/templates/hooks
-    fi
+    # and print out the uninstall results
 
-    UNINSTALL_OUTPUT=$(printf "y\\n\\n" | sh /var/lib/githooks/uninstall.sh 2>&1)
     # shellcheck disable=SC2181
-    if [ $? -ne 0 ]; then
+    if [ $UNINSTALL_RESULT -ne 0 ]; then
         echo "! Uninstall failed in $STEP, output:"
         echo "$UNINSTALL_OUTPUT"
         FAILED=$((FAILED + 1))
     fi
+
+    # revert any changes
 
     git config --global --unset init.templateDir
     git config --global --unset githooks.shared
