@@ -43,10 +43,12 @@ sed -i '' -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if
 export GIT_TEMPLATE_DIR="/usr/local/Cellar/git/2.18.0/share/git-core/templates"
 
 # Setup a timeout command for OS X
-cat << EOF | sudo tee /usr/bin/timeout
-perl -e 'alarm shift; exec @ARGV' "$@";
+mkdir .bin
+cat << EOF > .bin/timeout
+perl -e 'alarm shift; exec @ARGV' "\$@";
 EOF
-sudo chmod +x /usr/bin/timeout
+chmod +x .bin/timeout
+export PATH=".bin/timeout:$PATH"
 
 # Give tests a bit more time on Windows
 export TIMEOUT=15
