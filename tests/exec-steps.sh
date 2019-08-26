@@ -42,7 +42,7 @@ for STEP in /var/lib/tests/step-*.sh; do
         echo "  x  $STEP has been skipped, reason: $REASON"
         SKIPPED=$((SKIPPED + 1))
 
-    elif [ $TEST_RESULT -eq 124 ]; then
+    elif [ $TEST_RESULT -eq 124 ] || [ $TEST_RESULT -eq 142 ]; then
         echo "! $STEP has timed out after $TIMEOUT seconds, output:"
         echo "$TEST_OUTPUT"
         FAILED=$((FAILED + 1))
