@@ -32,7 +32,7 @@ for STEP in /var/lib/tests/step-*.sh; do
 
     TEST_RUNS=$((TEST_RUNS + 1))
 
-    TEST_OUTPUT=$(sh "$STEP" 2>&1)
+    TEST_OUTPUT=$(timeout 10 sh "$STEP" 2>&1)
     TEST_RESULT=$?
     # shellcheck disable=SC2181
     if [ $TEST_RESULT -eq 249 ]; then
