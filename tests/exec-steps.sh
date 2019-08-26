@@ -8,6 +8,7 @@ fi
 TEST_RUNS=0
 FAILED=0
 SKIPPED=0
+TIMEOUT=10
 
 FAILED_TEST_LIST=""
 
@@ -32,13 +33,20 @@ for STEP in /var/lib/tests/step-*.sh; do
 
     TEST_RUNS=$((TEST_RUNS + 1))
 
-    TEST_OUTPUT=$(timeout 10 sh "$STEP" 2>&1)
+    TEST_OUTPUT=$(timeout $TIMEOUT sh "$STEP" 2>&1)
     TEST_RESULT=$?
     # shellcheck disable=SC2181
     if [ $TEST_RESULT -eq 249 ]; then
         REASON=$(echo "$TEST_OUTPUT" | tail -1)
         echo "  x  $STEP has been skipped, reason: $REASON"
         SKIPPED=$((SKIPPED + 1))
+
+    elif [ $TEST_RESULT -eq 124 ]; then
+        echo "! $STEP has timed out after $TIMEOUT seconds, output:"
+        echo "$TEST_OUTPUT"
+        FAILED=$((FAILED + 1))
+        FAILED_TEST_LIST="$FAILED_TEST_LIST
+- $STEP (timeout)"
 
     elif [ $TEST_RESULT -ne 0 ]; then
         FAILURE=$(echo "$TEST_OUTPUT" | tail -1)
