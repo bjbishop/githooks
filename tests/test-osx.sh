@@ -5,6 +5,8 @@ else
     STEPS_TO_RUN="step-*"
 fi
 
+set -x
+
 ROOT_DIR="$HOME/Library/testroot"
 mkdir -p "$ROOT_DIR/githooks" || true
 cp base-template.sh "$ROOT_DIR/githooks"/ || exit 1
@@ -46,4 +48,4 @@ sed -i -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if fa
 #export TIMEOUT=15
 
 # Run the tests with no input available
-: | sh "$ROOT_DIR"/tests/exec-steps.sh
+: | sh -x "$ROOT_DIR"/tests/exec-steps.sh
