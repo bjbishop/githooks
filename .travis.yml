@@ -12,6 +12,7 @@ matrix:
     env: >
       TEST_INSTANCE=test-windows
       TEST_TRAVIS_OS=windows
+      TIMEOUT=30
 
   # also kick off an OS X build early on
   - os: osx

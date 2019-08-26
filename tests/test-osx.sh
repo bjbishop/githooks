@@ -51,8 +51,5 @@ EOF
 chmod +x "$(pwd)/.bin/timeout"
 export PATH="$(pwd)/.bin:$PATH"
 
-# Give tests a bit more time on Windows
-export TIMEOUT=15
-
 # Run the tests with no input available
 : | sh "$ROOT_DIR"/tests/exec-steps.sh
