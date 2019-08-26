@@ -19,6 +19,8 @@ for STEP in /var/lib/tests/step-*.sh; do
     echo "> Executing $STEP_NAME"
     echo "  :: $STEP_DESC"
 
+    # clear any leftovers 
+
     if [ -w /usr/share/git-core ]; then
         mkdir -p /usr/share/git-core/templates/hooks
         rm -rf /usr/share/git-core/templates/hooks/*

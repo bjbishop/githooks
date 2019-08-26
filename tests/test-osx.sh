@@ -36,6 +36,9 @@ sed -i '' -E 's|HOOK_NAME=.*|HOOK_NAME=\${HOOK_NAME:-\$(basename "\$0")}|' "$ROO
 sed -i '' -E "s|([^\"])/var/lib/|\1\"$ROOT_DIR\"/|g" "$ROOT_DIR"/tests/exec-steps.sh "$ROOT_DIR"/tests/step-* || exit 7
 sed -i '' -E "s|\"/var/lib/|\"$ROOT_DIR/|g" "$ROOT_DIR"/tests/exec-steps.sh "$ROOT_DIR"/tests/step-* || exit 7
 
+# make uninstalls faster
+sed -i '' -E 's#printf "y\\n\\n" | (sh .*/uninstall.sh)#echo "n" | \1#' "$ROOT_DIR"/tests/exec-steps.sh
+
 # Allow running outside of Docker containers
 sed -i '' -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if false; then|" "$ROOT_DIR"/tests/exec-steps.sh
 
@@ -44,12 +47,13 @@ export GIT_TEMPLATE_DIR="/usr/local/Cellar/git/2.18.0/share/git-core/templates"
 
 # Setup a timeout command for OS X
 mkdir "$(pwd)/.bin"
-cat << EOF > "$(pwd)/.bin/timeout"
+cat <<EOF >"$(pwd)/.bin/timeout"
 #!/bin/sh
 perl -e 'alarm shift; exec @ARGV' "\$@";
 EOF
 chmod +x "$(pwd)/.bin/timeout"
-export PATH="$(pwd)/.bin:$PATH"
+PATH="$(pwd)/.bin:$PATH"
+export PATH
 
 # Run the tests with no input available
 : | sh "$ROOT_DIR"/tests/exec-steps.sh
