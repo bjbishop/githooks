@@ -38,8 +38,8 @@ for STEP in /var/lib/tests/step-*.sh; do
     TEST_RESULT=$?
     TEST_TIME_END=$(date +%s)
 
-    let TEST_DURATION="TEST_TIME_END-TEST_TIME_START"
-    if [ $TEST_DURATION -gt 0 ]; then
+    TEST_DURATION=$((TEST_TIME_END - TEST_TIME_START))
+    if [ $TEST_DURATION -gt 1 ]; then
         echo "  __ Took $TEST_DURATION seconds"
     fi
 
