@@ -5,8 +5,6 @@ else
     STEPS_TO_RUN="step-*"
 fi
 
-set -x
-
 ROOT_DIR="$HOME/Library/testroot"
 mkdir -p "$ROOT_DIR/githooks" || true
 cp base-template.sh "$ROOT_DIR/githooks"/ || exit 1
@@ -40,9 +38,6 @@ sed -i '' -E "s|\"/var/lib/|\"$ROOT_DIR/|g" "$ROOT_DIR"/tests/exec-steps.sh "$RO
 
 # Allow running outside of Docker containers
 sed -i '' -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if false; then|" "$ROOT_DIR"/tests/exec-steps.sh
-
-find /usr -name 'pre-commit*'
-find /Library -name 'pre-commit*'
 
 # Configure a default Git template directory for Windows
 export GIT_TEMPLATE_DIR="/usr/local/Cellar/git/2.18.0/share/git-core/templates"
