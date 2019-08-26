@@ -42,4 +42,4 @@ sed -i -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if fa
 # Close stdin
 exec 0<&-
 
-sh "$ROOT_DIR"/tests/exec-steps.sh
+: | sh "$ROOT_DIR"/tests/exec-steps.sh
