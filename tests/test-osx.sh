@@ -46,14 +46,8 @@ sed -i '' -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if
 export GIT_TEMPLATE_DIR="/usr/local/Cellar/git/2.18.0/share/git-core/templates"
 
 # Setup a timeout command for OS X
-mkdir "$(pwd)/.bin"
-cat <<EOF >"$(pwd)/.bin/timeout"
-#!/bin/sh
-perl -e 'alarm shift; exec @ARGV' "\$@";
-EOF
-chmod +x "$(pwd)/.bin/timeout"
-PATH="$(pwd)/.bin:$PATH"
-export PATH
+brew install coreutils
+sudo ln -s /usr/local/bin/gtimeout /usr/local/bin/timeout
 
 # Run the tests with no input available
 : | sh "$ROOT_DIR"/tests/exec-steps.sh
