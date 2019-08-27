@@ -37,7 +37,7 @@ sed -i '' -E "s|([^\"])/var/lib/|\1\"$ROOT_DIR\"/|g" "$ROOT_DIR"/tests/exec-step
 sed -i '' -E "s|\"/var/lib/|\"$ROOT_DIR/|g" "$ROOT_DIR"/tests/exec-steps.sh "$ROOT_DIR"/tests/step-* || exit 7
 
 # make uninstalls faster
-sed -i '' -E 's#printf "y\\n\\n" | (sh .*/uninstall.sh)#echo "n" | \1#' "$ROOT_DIR"/tests/exec-steps.sh
+sed -i '' -E 's#printf "y\\n\\n" | (.* sh .*/uninstall.sh)#echo "n" | \1#' "$ROOT_DIR"/tests/exec-steps.sh
 
 # Allow running outside of Docker containers
 sed -i '' -E "s|if ! grep '/docker/' </proc/self/cgroup >/dev/null 2>&1; then|if false; then|" "$ROOT_DIR"/tests/exec-steps.sh
