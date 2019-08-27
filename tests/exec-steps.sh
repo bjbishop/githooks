@@ -54,7 +54,7 @@ for STEP in /var/lib/tests/step-*.sh; do
     fi
 
     UNINSTALL_TIME_START=$(date +%s)
-    UNINSTALL_OUTPUT=$(printf "y\\n\\n" | sh /var/lib/githooks/uninstall.sh 2>&1)
+    UNINSTALL_OUTPUT=$(printf "y\\n\\n" | timeout "$TIMEOUT" sh /var/lib/githooks/uninstall.sh 2>&1)
     UNINSTALL_RESULT=$?
     UNINSTALL_TIME_END=$(date +%s)
 
